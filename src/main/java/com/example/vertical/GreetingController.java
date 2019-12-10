@@ -57,7 +57,7 @@ public class GreetingController {
         return "main";
 
     }*/
-    /*@PostMapping
+    @PostMapping
     public String add(@RequestParam String clientName, @RequestParam String clientEmail, @RequestParam String clientNumber,
                       @RequestParam String clientText, Map<String, Object> model) {
         Client client = new Client(clientName, clientEmail, clientNumber, clientText);
@@ -65,18 +65,18 @@ public class GreetingController {
         mongoOperation.save(client);
         Iterable<Model> models = mongoOperation.findAll(Model.class);
         model.put("models", models);
-
+        System.out.println(models);
         return "main";
-    }*/
-    @PostMapping
+    }
+   /* @PostMapping
     public String add(@RequestParam String modelHeader, @RequestParam String modelPath, @RequestParam String modelDescription,
                        Map<String, Object> model) {
         Model mod = new Model(modelHeader, modelPath, modelDescription);
-        System.out.println(mod);
+
         mongoOperation.save(mod);
         Iterable<Model> models = mongoOperation.findAll(Model.class);
-        model.put("models", mod);
-
+        model.put("models", models);
+        System.out.println(models);
         return "main";
-    }
+    }*/
 }
