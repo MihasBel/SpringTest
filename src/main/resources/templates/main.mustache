@@ -167,14 +167,12 @@
 
 
     </section>
-    <section>
+    <section class="model">
         {{#clients}}
-            <div>
-                <b>{{id}}</b>
-                <span>{{clientName}}</span>
-                <span>{{clientEmail}}</span>
-                <span>{{clientNumber}}</span>
-                <i>{{clientText}}</i>
+            <div class="model-content">
+                <h2>{{modelHeader}}</h2>
+                <img src="img/{{modelPath}}" alt="{{modelPath}}">
+                <p>{{modelDescription}}</p>
             </div>
         {{/clients}}
     </section>

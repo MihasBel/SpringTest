@@ -1,8 +1,8 @@
 package com.example.vertical;
 
+import com.example.vertical.model.Model;
 import com.example.vertical.model.Student;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,14 +57,25 @@ public class GreetingController {
         return "main";
 
     }*/
-    @PostMapping
+    /*@PostMapping
     public String add(@RequestParam String clientName, @RequestParam String clientEmail, @RequestParam String clientNumber,
                       @RequestParam String clientText, Map<String, Object> model) {
         Client client = new Client(clientName, clientEmail, clientNumber, clientText);
         System.out.println(client);
         mongoOperation.save(client);
-        Iterable<Client> clients = mongoOperation.findAll(Client.class);
-        model.put("clients", clients);
+        Iterable<Model> models = mongoOperation.findAll(Model.class);
+        model.put("models", models);
+
+        return "main";
+    }*/
+    @PostMapping
+    public String add(@RequestParam String modelHeader, @RequestParam String modelPath, @RequestParam String modelDescription,
+                       Map<String, Object> model) {
+        Model mod = new Model(modelHeader, modelPath, modelDescription);
+        System.out.println(mod);
+        mongoOperation.save(mod);
+        Iterable<Model> models = mongoOperation.findAll(Model.class);
+        model.put("models", mod);
 
         return "main";
     }
