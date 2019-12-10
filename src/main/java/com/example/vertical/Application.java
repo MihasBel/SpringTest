@@ -1,5 +1,9 @@
 package com.example.vertical;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -7,12 +11,15 @@ import com.example.vertical.config.MongoConfig;
 import com.example.vertical.model.Student;
 
 
+@SpringBootApplication
+
 public class Application {
 
     public static void main (String[] args) {
+        SpringApplication.run(Application.class, args);
 
 
-        // For Annotation
+        /*// For Annotation
         ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
         MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
         MongoDBPOperations ops = new MongoDBPOperations();
@@ -37,7 +44,7 @@ public class Application {
         //ops.removeStudent(mongoOperation, "studentName", "John");
         // get all the students
         //ops.getAllStudent(mongoOperation);
-
+*/
 
     }
 

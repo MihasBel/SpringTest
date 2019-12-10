@@ -36,11 +36,9 @@ public class MongoDBPOperations {
                 Student.class);
         System.out.println("Student got updated successfully");
     }
-    public void getAllStudent(MongoOperations mongoOperation) {
-        List listStudent = mongoOperation.findAll(Student.class);
-        for(Object student:listStudent) {
-            System.out.println("Student = " + student);
-        }
+    public List getAllStudent(MongoOperations mongoOperation) {
+        return mongoOperation.findAll(Student.class);
+
     }
     public void removeStudent(MongoOperations mongoOperation, String critera,String value) {
         Query searchStudent = new Query(Criteria.where(critera).is(value));
