@@ -70,3 +70,34 @@ var smoothJumpUp = function() {
     createParallax(".first_parallax");
     createParallax(".secondParalla");
     createParallax(".thirdParalla");
+    // Form Submit
+    /*clientName, clientEmail, clientNumber, clientText*/
+    $("#submitForm").click(function(event) {
+
+
+        let clientName = $('#clientName').val();
+        let clientEmail = $('#clientEmail').val();
+        let clientNumber = $('#clientNumber').val();
+        let clientText = $('#clientText').val();
+
+
+        $.post("/saveClient", {
+            clientName   : clientName   ,
+            clientEmail   : clientEmail   ,
+            clientNumber   : clientNumber   ,
+            clientText   : clientText
+
+        }, function(data) {
+
+            //var json = JSON.parse(data);
+            //...
+
+        }).done(function(data) {
+            alert("hiiii state list");
+
+            //location.reload();
+        }).fail(function(xhr, textStatus, errorThrown) {
+        })
+        event.preventDefault();
+
+    });

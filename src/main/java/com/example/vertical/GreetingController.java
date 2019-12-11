@@ -3,9 +3,7 @@ package com.example.vertical;
 import com.example.vertical.model.Model;
 import com.example.vertical.model.Student;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -18,6 +16,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import com.example.vertical.model.Client;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Controller
@@ -41,10 +41,10 @@ public class GreetingController {
         return "greeting";
     }
     @GetMapping
-    public String main(@RequestParam(name="some", required=false, defaultValue="red")
-                                   String some,
-                       Map<String, Object> model) {
-        model.put("some",some);
+    public String main(Map<String, Object> model) {
+        Iterable<Model> models = mongoOperation.findAll(Model.class);
+        model.put("models", models);
+        System.out.println(models);
         return "main";
     }
     /*@PostMapping
@@ -57,16 +57,25 @@ public class GreetingController {
         return "main";
 
     }*/
-    @PostMapping
-    public String add(@RequestParam String clientName, @RequestParam String clientEmail, @RequestParam String clientNumber,
+    /*@PostMapping("/saveClient")
+    public void add(@RequestParam String clientName, @RequestParam String clientEmail, @RequestParam String clientNumber,
                       @RequestParam String clientText, Map<String, Object> model) {
         Client client = new Client(clientName, clientEmail, clientNumber, clientText);
         System.out.println(client);
         mongoOperation.save(client);
-        Iterable<Model> models = mongoOperation.findAll(Model.class);
-        model.put("models", models);
-        System.out.println(models);
-        return "main";
+
+
+    }*/
+    @RequestMapping(value="/saveClient",method = RequestMethod.POST)
+    public @ResponseBody void add(HttpServletRequest request, HttpServletResponse response,
+                                            @RequestParam String clientName,
+                                            @RequestParam String clientEmail,
+                                            @RequestParam String clientNumber,
+                                            @RequestParam String clientText, Map<String, Object> model) {
+        System.out.println("Get state");
+        Client client = new Client(clientName, clientEmail, clientNumber, clientText);
+        System.out.println(client);
+        mongoOperation.save(client);
     }
    /* @PostMapping
     public String add(@RequestParam String modelHeader, @RequestParam String modelPath, @RequestParam String modelDescription,
