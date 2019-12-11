@@ -93,7 +93,7 @@ var smoothJumpUp = function() {
             //...
 
         }).done(function(data) {
-            alert("hiiii state list");
+            alert("успешно отправлено!");
 
             //location.reload();
         }).fail(function(xhr, textStatus, errorThrown) {
